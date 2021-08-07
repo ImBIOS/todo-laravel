@@ -24,9 +24,9 @@ class TasksController extends Controller
         ]);
         $task = new Task();
         $task->description = $request->description;
-        $task->user_id = auth()->user()->id;
+        $task->user_id = Auth::id();
         $task->save();
-        return redirect('/dashboard');
+        return redirect('/');
     }
 
     public function edit(Task $task)
@@ -43,14 +43,14 @@ class TasksController extends Controller
     {
         if (isset($_POST['delete'])) {
             $task->delete();
-            return redirect('/dashboard');
+            return redirect('/');
         } else {
             $this->validate($request, [
                 'description' => 'required'
             ]);
             $task->description = $request->description;
             $task->save();
-            return redirect('/dashboard');
+            return redirect('/');
         }
     }
 }
